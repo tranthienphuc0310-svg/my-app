@@ -8,7 +8,6 @@ import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
-// Chỉ cần import các component cơ bản của shadcn (Không cần form.tsx nữa)
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -23,16 +22,24 @@ const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
 
-const loginSchema = z.object({
-  email: z.string().email("Email không đúng định dạng"),
-  password: z.string().min(6, "Mật khẩu quá ngắn"),
-  username: z.string().min(3, "Tên người dùng quá ngắn"),
-});
+const loginSchema = z
+  .object({
+    username: z.string().min(3, "Tên người dùng quá ngắn"),
+    email: z.email("Email không đúng định dạng"),
+    password: z.string().min(6, "Mật khẩu quá ngắn"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Mật khẩu xác nhận không khớp",
+    path: ["confirmPassword"],
+  });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const createUserApi = async (data: LoginFormData) => {
-  const response = await api.post("/posts", data);
+  // Loại bỏ confirmPassword trước khi gửi lên API nếu cần
+  const { confirmPassword, ...payload } = data;
+  const response = await api.post("/posts", payload);
   return response.data;
 };
 
@@ -45,9 +52,10 @@ export default function LoginPage() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
+      username: "",
       email: "",
       password: "",
-      username: "",
+      confirmPassword: "",
     },
   });
 
@@ -74,7 +82,8 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50/50 p-4">
-      <Card className="w-full max-w-md shadow-lg">
+      {/* Tăng kích thước card bằng cách đổi max-w-md thành max-w-lg */}
+      <Card className="w-full max-w-lg shadow-lg">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold tracking-tight">
             Tạo tài khoản
@@ -85,7 +94,6 @@ export default function LoginPage() {
         </CardHeader>
 
         <CardContent>
-          {/* Sử dụng form thuần túy kết hợp handleSubmit của react-hook-form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Username Field */}
             <div className="space-y-2">
@@ -128,6 +136,23 @@ export default function LoginPage() {
               {errors.password && (
                 <p className="text-sm font-medium text-destructive">
                   {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            {/* Confirm Password Field */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium leading-none">
+                Xác nhận mật khẩu
+              </label>
+              <Input
+                type="password"
+                placeholder="••••••••"
+                {...register("confirmPassword")}
+              />
+              {errors.confirmPassword && (
+                <p className="text-sm font-medium text-destructive">
+                  {errors.confirmPassword.message}
                 </p>
               )}
             </div>
