@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./queryclient";
-import Link from "next/link";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
+import Navbar from "./componentplace/navbar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { SettingsSidebar } from "./componentplace/sidebar";
+import { Toaster } from "@/components/ui/sonner";
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -21,18 +20,32 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Link href="/productpage">product</Link>
+      <body className="h-screen w-full overflow-hidden m-0 antialiased">
         <Providers>
-          <NuqsAdapter>{children}</NuqsAdapter>
+          <NuqsAdapter>
+            {/* SidebarProvider bao bọc toàn bộ màn hình */}
+            <SidebarProvider className="h-full w-full flex">
+              {/* 1. Sidebar nằm cố định bên trái, chiếm trọn chiều cao màn hình */}
+              <SettingsSidebar />
+
+              {/* 2. Cột bên phải chứa Navbar ở trên và Nội dung ở dưới */}
+              <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                <Navbar />
+
+                {/* Vùng hiển thị nội dung chính của các trang (profile, language,...) */}
+                <main className="flex-1 overflow-auto p-8 bg-gray-50/50">
+                  {children}
+                </main>
+                <Toaster richColors position="top-right" />
+              </div>
+            </SidebarProvider>
+          </NuqsAdapter>
         </Providers>
       </body>
     </html>
