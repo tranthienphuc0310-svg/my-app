@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import LanguagePage from "./Languagechange";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -18,7 +17,6 @@ export default function Navbar() {
     <header className="bg-white border-b border-gray-200 shadow-sm">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <LanguagePage />
           <Link
             href={getLocalizedHref("/")}
             className={`font-medium transition-colors ${
