@@ -7,6 +7,7 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,28 +23,34 @@ const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
 
-const loginSchema = z
-  .object({
-    username: z.string().min(3, "Tên người dùng quá ngắn"),
-    email: z.email("Email không đúng định dạng"),
-    password: z.string().min(6, "Mật khẩu quá ngắn"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Mật khẩu xác nhận không khớp",
-    path: ["confirmPassword"],
-  });
+// Tạo schema bằng hàm để nhận diện bản dịch từ next-intl
+const createLoginSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      username: z.string().min(3, t("usernameMin")),
+      email: z.email(t("emailInvalid")),
+      password: z.string().min(6, t("passwordMin")),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t("passwordMismatch"),
+      path: ["confirmPassword"],
+    });
 
-type LoginFormData = z.infer<typeof loginSchema>;
-
-const createUserApi = async (data: LoginFormData) => {
-  // Loại bỏ confirmPassword trước khi gửi lên API nếu cần
-  const { confirmPassword, ...payload } = data;
-  const response = await api.post("/posts", payload);
+const createUserApi = async (
+  data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
+) => {
+  const response = await api.post("/posts", data);
   return response.data;
 };
 
 export default function LoginPage() {
+  const t = useTranslations("LoginPage");
+
+  // Khởi tạo schema dựa trên ngôn ngữ hiện tại
+  const loginSchema = createLoginSchema(t);
+  type LoginFormData = z.infer<typeof loginSchema>;
+
   const {
     register,
     handleSubmit,
@@ -60,18 +67,21 @@ export default function LoginPage() {
   });
 
   const mutation = useMutation({
-    mutationFn: createUserApi,
+    mutationFn: async (data: LoginFormData) => {
+      const { confirmPassword, ...payload } = data;
+      return createUserApi(payload);
+    },
     onSuccess: (data) => {
       console.log("Server phản hồi:", data);
-      toast.success("Thành công!", {
-        description: "Bạn đã gửi dữ liệu thành công.",
+      toast.success(t("successTitle"), {
+        description: t("successDesc"),
       });
       reset();
     },
     onError: (error) => {
       console.error("Lỗi rồi:", error);
-      toast.error("Đã xảy ra lỗi", {
-        description: "Không thể gửi dữ liệu lên server lúc này.",
+      toast.error(t("errorTitle"), {
+        description: t("errorDesc"),
       });
     },
   });
@@ -82,14 +92,13 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50/50 p-4">
-      {/* Tăng kích thước card bằng cách đổi max-w-md thành max-w-lg */}
       <Card className="w-full max-w-lg shadow-lg">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold tracking-tight">
-            Tạo tài khoản
+            {t("title")}
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            Nhập thông tin của bạn để tiếp tục
+            {t("description")}
           </CardDescription>
         </CardHeader>
 
@@ -98,9 +107,12 @@ export default function LoginPage() {
             {/* Username Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none">
-                Tên người dùng
+                {t("username")}
               </label>
-              <Input placeholder="Nhập tên của bạn" {...register("username")} />
+              <Input
+                placeholder={t("usernamePlaceholder")}
+                {...register("username")}
+              />
               {errors.username && (
                 <p className="text-sm font-medium text-destructive">
                   {errors.username.message}
@@ -110,7 +122,9 @@ export default function LoginPage() {
 
             {/* Email Field */}
             <div className="space-y-2">
-              <label className="text-sm font-medium leading-none">Email</label>
+              <label className="text-sm font-medium leading-none">
+                {t("email")}
+              </label>
               <Input
                 type="email"
                 placeholder="name@example.com"
@@ -126,7 +140,7 @@ export default function LoginPage() {
             {/* Password Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none">
-                Mật khẩu
+                {t("password")}
               </label>
               <Input
                 type="password"
@@ -143,7 +157,7 @@ export default function LoginPage() {
             {/* Confirm Password Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none">
-                Xác nhận mật khẩu
+                {t("confirmPassword")}
               </label>
               <Input
                 type="password"
@@ -166,10 +180,10 @@ export default function LoginPage() {
               {mutation.isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Đang xử lý...
+                  {t("processing")}
                 </>
               ) : (
-                "Đăng ký"
+                t("submit")
               )}
             </Button>
           </form>

@@ -20,11 +20,6 @@ const items = [
     url: "/profile",
     icon: User,
   },
-  {
-    title: "Language",
-    url: "/language",
-    icon: Globe,
-  },
 ];
 
 export function SettingsSidebar() {

@@ -1,4 +1,4 @@
-import PostPage from "./usequerycomponent/usequery";
+import PostPage from "../componentplace/usequerycomponent/usequery";
 
 export default function Post() {
   return (

@@ -1,0 +1,21 @@
+{
+  "LoginPage": {
+    "title": "Create an account",
+    "description": "Enter your information to continue",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "usernameMin": "Username is too short",
+    "email": "Email",
+    "emailInvalid": "Invalid email format",
+    "password": "Password",
+    "passwordMin": "Password is too short",
+    "confirmPassword": "Confirm Password",
+    "passwordMismatch": "Passwords do not match",
+    "submit": "Sign up",
+    "processing": "Processing...",
+    "successTitle": "Success!",
+    "successDesc": "You have successfully submitted the data.",
+    "errorTitle": "An error occurred",
+    "errorDesc": "Could not send data to the server at this time."
+  }
+}
