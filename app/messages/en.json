@@ -1,4 +1,18 @@
 {
+  "Homepage": {
+    "hero": {
+      "badge": "Premium Shopping Experience",
+      "title": "Discover Modern Luxury Shopping",
+      "highlight": "Luxury",
+      "description": "Experience a curated marketplace where elegance meets innovation.",
+      "primaryButton": "Explore Collection",
+      "secondaryButton": "Learn More"
+    },
+    "features": {
+      "title": "Why Choose Us",
+      "description": "Designed to provide a seamless premium shopping experience."
+    }
+  },
   "LoginPage": {
     "title": "Create an account",
     "description": "Enter your information to continue",

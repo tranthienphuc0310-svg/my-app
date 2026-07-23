@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { resolve } from "path";
 
 const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
@@ -32,10 +33,19 @@ const createLoginSchema = (t: (key: string) => string) =>
       password: z.string().min(6, t("passwordMin")),
       confirmPassword: z.string(),
     })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: t("passwordMismatch"),
-      path: ["confirmPassword"],
-    });
+    .refine(
+      async (data) => {
+        // Tạo một khoảng trễ (timeout) 1 giây trước khi kiểm tra
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Trả về kết quả so sánh (true nếu khớp, false nếu không khớp)
+        return data.password === data.confirmPassword;
+      },
+      {
+        message: t("passwordMismatch"),
+        path: ["confirmPassword"],
+      },
+    );
 
 const createUserApi = async (
   data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
