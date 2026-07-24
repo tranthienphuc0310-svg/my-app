@@ -1,12 +1,9 @@
 "use client";
-
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 
 export default function Navbar() {
-  const pathname = usePathname();
-
   const [lang] = useQueryState("lang", {
     defaultValue: "vi",
   });
@@ -16,9 +13,10 @@ export default function Navbar() {
   return (
     <header className="bg-white border-b border-gray-200 shadow-sm">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-8">
-          <Link href={getLocalizedHref("/")}>Home</Link>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger />
 
+          <Link href={getLocalizedHref("/")}>Home</Link>
           <Link href={getLocalizedHref("/productpage")}>Product</Link>
         </div>
 

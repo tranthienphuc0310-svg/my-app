@@ -7,7 +7,6 @@ import Navbar from "./componentplace/navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { SettingsSidebar } from "./componentplace/sidebar";
 import { Toaster } from "@/components/ui/sonner";
-import { IntlProvider } from "./componentplace/intlprovider";
 import { Suspense } from "react";
 import ClientProvider from "./componentplace/clientProvider";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
