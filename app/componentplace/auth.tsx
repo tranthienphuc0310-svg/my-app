@@ -18,7 +18,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { resolve } from "path";
 
 const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",

@@ -8,6 +8,8 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { SettingsSidebar } from "./componentplace/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { IntlProvider } from "./componentplace/intlprovider";
+import { Suspense } from "react";
+import ClientProvider from "./componentplace/clientProvider";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -37,13 +39,14 @@ export default function RootLayout({
 
               {/* 2. Cột bên phải chứa Navbar ở trên và Nội dung ở dưới */}
               <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-                <Navbar />
+                <Suspense fallback={<h1>isloading</h1>}>
+                  <Navbar />
+                </Suspense>
+
                 {/* Vùng hiển thị nội dung chính của các trang (profile, language,...) */}
-                <IntlProvider>
-                  <main className="flex-1 overflow-auto p-8 bg-gray-50/50">
-                    {children}
-                  </main>
-                </IntlProvider>
+                <ClientProvider>
+                  <main>{children}</main>
+                </ClientProvider>
                 <Toaster richColors position="top-right" />
               </div>
             </SidebarProvider>

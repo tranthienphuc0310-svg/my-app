@@ -1,9 +1,10 @@
+import { Suspense } from "react";
 import PostPage from "../componentplace/usequerycomponent/usequery";
 
-export default function Post() {
+export default function Page() {
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <PostPage />
-    </div>
+    </Suspense>
   );
 }
