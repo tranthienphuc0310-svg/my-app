@@ -11,6 +11,7 @@ export default function LanguagePage() {
   const LanguageOption = [
     { code: "en", label: "English" },
     { code: "vi", label: "Tiếng Việt" },
+    { code: "de", label: "German" },
   ];
   return (
     <section>

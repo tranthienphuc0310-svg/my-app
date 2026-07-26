@@ -8,9 +8,10 @@ import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+
 import {
   Card,
   CardContent,
@@ -18,7 +19,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
@@ -45,7 +45,6 @@ const createLoginSchema = (t: (key: string) => string) =>
         path: ["confirmPassword"],
       },
     );
-
 const createUserApi = async (
   data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
 ) => {
@@ -55,6 +54,7 @@ const createUserApi = async (
 
 export default function LoginPage() {
   const t = useTranslations("LoginPage");
+  const Router = useRouter();
 
   // Khởi tạo schema dựa trên ngôn ngữ hiện tại
   const loginSchema = createLoginSchema(t);
@@ -86,6 +86,7 @@ export default function LoginPage() {
         description: t("successDesc"),
       });
       reset();
+      Router.push("/productpage");
     },
     onError: (error) => {
       console.error("Lỗi rồi:", error);

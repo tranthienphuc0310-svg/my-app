@@ -2,7 +2,7 @@
 import { useQueryState } from "nuqs"; // Import từ nuqs
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { productsQueryOptions } from "./queryoption";
-import SearchBar from "./searchbar";
+import SearchBarWithSuggestions from "./searchbar";
 import { useMemo } from "react";
 const removeDiacritics = (str: string) => {
   return str
@@ -38,7 +38,7 @@ export default function PostPage() {
 
   return (
     <div className="min-h-screen bg-white px-8 py-10">
-      <SearchBar />
+      <SearchBarWithSuggestions />
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Array.isArray(productsArray) &&

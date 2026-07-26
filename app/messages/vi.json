@@ -1,18 +1,4 @@
 {
-  "Homepage": {
-    "hero": {
-      "badge": "Trải nghiệm mua sắm cao cấp",
-      "title": "Khám phá phong cách mua sắm",
-      "highlight": "Sang Trọng",
-      "description": "Khám phá không gian mua sắm hiện đại.",
-      "primaryButton": "Khám phá bộ sưu tập",
-      "secondaryButton": "Tìm hiểu thêm"
-    },
-    "features": {
-      "title": "Tại sao chọn chúng tôi",
-      "description": "Mang đến trải nghiệm mua sắm cao cấp."
-    }
-  },
   "LoginPage": {
     "title": "Tạo tài khoản",
     "description": "Nhập thông tin của bạn để tiếp tục",
@@ -31,5 +17,8 @@
     "successDesc": "Bạn đã gửi dữ liệu thành công.",
     "errorTitle": "Đã xảy ra lỗi",
     "errorDesc": "Không thể gửi dữ liệu đến máy chủ lúc này."
+  },
+  "searchbar": {
+    "searchwords": "nhập tên sản phẩm bạn muốn tìm"
   }
 }

@@ -1,0 +1,24 @@
+{
+  "LoginPage": {
+    "title": "Konto erstellen",
+    "description": "Geben Sie Ihre Informationen ein, um fortzufahren",
+    "username": "Benutzername",
+    "usernamePlaceholder": "Benutzernamen eingeben",
+    "usernameMin": "Der Benutzername ist zu kurz",
+    "email": "E-Mail",
+    "emailInvalid": "Ungültiges E-Mail-Format",
+    "password": "Passwort",
+    "passwordMin": "Das Passwort ist zu kurz",
+    "confirmPassword": "Passwort bestätigen",
+    "passwordMismatch": "Die Passwörter stimmen nicht überein",
+    "submit": "Registrieren",
+    "processing": "Wird verarbeitet...",
+    "successTitle": "Erfolgreich!",
+    "successDesc": "Ihre Daten wurden erfolgreich übermittelt.",
+    "errorTitle": "Ein Fehler ist aufgetreten",
+    "errorDesc": "Die Daten konnten derzeit nicht an den Server gesendet werden."
+  },
+  "searchbar": {
+    "searchwords": "Produkt suchen."
+  }
+}
