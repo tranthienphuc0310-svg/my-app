@@ -48,7 +48,7 @@ const createLoginSchema = (t: (key: string) => string) =>
 const createUserApi = async (
   data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
 ) => {
-  const response = await api.post("/posts", data);
+  const response = await api.post("/users", data);
   return response.data;
 };
 
