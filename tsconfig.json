@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "app/componentplace"
+    "app/componentplace",
+    "app/authpage"
   ],
   "exclude": ["node_modules"]
 }
