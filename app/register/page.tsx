@@ -1,4 +1,4 @@
-import AuthComponent from "../componentplace/auth"; // Đảm bảo đúng đường dẫn tới file auth.tsx
+import AuthComponent from "../componentplace/register"; // Đảm bảo đúng đường dẫn tới file auth.tsx
 import { Suspense } from "react";
 export default function AuthPage() {
   return (

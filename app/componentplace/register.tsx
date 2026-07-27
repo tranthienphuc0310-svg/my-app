@@ -20,7 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 const api = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
+  baseURL: "https://dummyjson.com",
 });
 
 // Tạo schema bằng hàm để nhận diện bản dịch từ next-intl
@@ -48,7 +48,7 @@ const createLoginSchema = (t: (key: string) => string) =>
 const createUserApi = async (
   data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
 ) => {
-  const response = await api.post("/users", data);
+  const response = await api.post("/auth/login", data);
   return response.data;
 };
 

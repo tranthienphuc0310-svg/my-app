@@ -21,7 +21,7 @@ export default function Navbar() {
         </div>
 
         <Link
-          href={getLocalizedHref("/authpage")}
+          href={getLocalizedHref("/resiter")}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg"
         >
           Log in
