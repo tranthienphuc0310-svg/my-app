@@ -1,5 +1,5 @@
 {
-  "LoginPage": {
+  "Registerpage": {
     "title": "Konto erstellen",
     "description": "Geben Sie Ihre Informationen ein, um fortzufahren",
     "username": "Benutzername",
@@ -20,5 +20,20 @@
   },
   "searchbar": {
     "searchwords": "Produkt suchen."
+  },
+  "LoginPage": {
+    "title": "Anmelden",
+    "description": "Geben Sie Ihren Benutzernamen und Ihr Passwort ein",
+    "username": "Benutzername",
+    "usernamePlaceholder": "Benutzernamen eingeben",
+    "usernameMin": "Der Benutzername muss mindestens 3 Zeichen haben",
+    "password": "Passwort",
+    "passwordMin": "Das Passwort muss mindestens 6 Zeichen haben",
+    "submit": "Anmelden",
+    "processing": "Anmeldung läuft...",
+    "successTitle": "Erfolgreich",
+    "successDesc": "Anmeldung erfolgreich.",
+    "errorTitle": "Anmeldung fehlgeschlagen",
+    "errorDesc": "Benutzername oder Passwort ist falsch."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "LoginPage": {
+  "Registerpage": {
     "title": "Tạo tài khoản",
     "description": "Nhập thông tin của bạn để tiếp tục",
     "username": "Tên đăng nhập",
@@ -20,5 +20,20 @@
   },
   "searchbar": {
     "searchwords": "nhập tên sản phẩm bạn muốn tìm"
+  },
+  "LoginPage": {
+    "title": "Đăng nhập",
+    "description": "Nhập tên đăng nhập và mật khẩu",
+    "username": "Tên đăng nhập",
+    "usernamePlaceholder": "Nhập tên đăng nhập",
+    "usernameMin": "Tên đăng nhập phải có ít nhất 3 ký tự",
+    "password": "Mật khẩu",
+    "passwordMin": "Mật khẩu phải có ít nhất 6 ký tự",
+    "submit": "Đăng nhập",
+    "processing": "Đang đăng nhập...",
+    "successTitle": "Thành công",
+    "successDesc": "Đăng nhập thành công.",
+    "errorTitle": "Đăng nhập thất bại",
+    "errorDesc": "Tên đăng nhập hoặc mật khẩu không đúng."
   }
 }

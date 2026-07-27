@@ -52,8 +52,8 @@ const createUserApi = async (
   return response.data;
 };
 
-export default function LoginPage() {
-  const t = useTranslations("LoginPage");
+export default function Registerpage() {
+  const t = useTranslations("Registerpage");
   const Router = useRouter();
 
   // Khởi tạo schema dựa trên ngôn ngữ hiện tại
