@@ -13,6 +13,12 @@ const removeDiacritics = (str: string) => {
 };
 
 export default function PostPage() {
+  const [lang] = useQueryState("lang", {
+    defaultValue: "vi",
+  });
+
+  const getLocalizedHref = (path: string) => `${path}?lang=${lang}`;
+
   const { data } = useSuspenseQuery(productsQueryOptions);
 
   const [search] = useQueryState("search", { defaultValue: "" });
@@ -44,7 +50,10 @@ export default function PostPage() {
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Array.isArray(productsArray) &&
           productsArray.map((product: any) => (
-            <Link key={product.id} href={`/productpage/${product.id}`}>
+            <Link
+              key={product.id}
+              href={getLocalizedHref(`/productpage/${product.id}`)}
+            >
               <div
                 key={product.id}
                 className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
