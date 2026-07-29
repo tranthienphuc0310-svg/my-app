@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -20,7 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 const api = axios.create({
-  baseURL: "https://dummyjson.com",
+  baseURL: "https://jsonplaceholder.typicode.com",
 });
 
 // Tạo schema bằng hàm để nhận diện bản dịch từ next-intl
@@ -48,7 +48,7 @@ const createLoginSchema = (t: (key: string) => string) =>
 const createUserApi = async (
   data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
 ) => {
-  const response = await api.post("/auth/login", data);
+  const response = await api.post("users", data);
   return response.data;
 };
 
@@ -88,8 +88,7 @@ export default function Registerpage() {
       reset();
       Router.push("/productpage");
     },
-    onError: (error) => {
-      console.error("Lỗi rồi:", error);
+    onError: () => {
       toast.error(t("errorTitle"), {
         description: t("errorDesc"),
       });

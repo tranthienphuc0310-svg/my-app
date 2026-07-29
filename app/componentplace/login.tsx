@@ -32,6 +32,7 @@ export default function Loginpage() {
   const loginSchema = createLoginSchema(t);
   type LoginFormData = z.infer<typeof loginSchema>;
   const loginApi = async (data: LoginFormData) => {
+    console.log("Data gửi lên:", data);
     const response = await api.post("/auth/login", data);
 
     return response.data;
