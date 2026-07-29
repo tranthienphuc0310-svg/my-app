@@ -28,7 +28,8 @@ type Productresponse = z.infer<typeof productSchema>;
 type ProductsResponse = z.infer<typeof productsSchema>;
 const fetchPosts = async (): Promise<ProductsResponse> => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  const response = await axios.get("https://dummyjson.com/products?limit=0");
+  const response = await axios.get("https://dummyjson.com/products?limit=194");
+  console.log(response.data.total);
   const validatedData = productsSchema.parse(response.data);
   return validatedData;
 };

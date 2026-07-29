@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="h-screen w-full overflow-hidden m-0 antialiased">
+      <body className="h-screen w-full  m-0 antialiased">
         <Providers>
           <NuqsAdapter>
             {/* SidebarProvider bao bọc toàn bộ màn hình */}
@@ -37,7 +37,7 @@ export default function RootLayout({
               <SettingsSidebar />
 
               {/* 2. Cột bên phải chứa Navbar ở trên và Nội dung ở dưới */}
-              <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+              <div className="flex-1 flex flex-col min-w-0 ">
                 <Suspense fallback={<h1>isloading</h1>}>
                   <Navbar />
                 </Suspense>
