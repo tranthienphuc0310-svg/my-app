@@ -2,18 +2,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import z from "zod";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-
+import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 
 import {
   Mail,
@@ -52,8 +45,15 @@ export default function Profile() {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg font-medium">Loading...</p>
+      <div className="flex flex-col items-center justify-center h-screen gap-4">
+        <h1 className="text-2xl font-bold">You haven't logged in yet</h1>
+
+        <Link
+          href="/Login"
+          className="rounded bg-blue-500 px-4 py-2 text-white"
+        >
+          Go to Login
+        </Link>
       </div>
     );
   }
