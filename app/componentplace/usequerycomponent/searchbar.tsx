@@ -41,6 +41,7 @@ export default function SearchBarWithSuggestions() {
       for (let i = 1; i <= normalizedTitle.length; i++) {
         const prefix = normalizedTitle.slice(0, i);
         if (!prefix) continue;
+        if (prefix.endsWith(" ")) continue;
 
         const existing = map.get(prefix) ?? [];
         if (existing.length < 5 && !existing.includes(title)) {
