@@ -3,9 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useQueryState } from "nuqs";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
-import { productsQueryOptions } from "./queryoption";
 import { useTranslations } from "next-intl";
-
+import { productsQueryOptions } from "@/components/queryoption/productoption";
 const removeDiacritics = (value: string) =>
   value
     .normalize("NFD")

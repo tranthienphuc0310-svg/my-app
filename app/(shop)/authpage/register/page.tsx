@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Registerpage from "../componentplace/register";
+import Registerpage from "@/features/auth/registerpage";
 export default function AuthPage() {
   return (
     <div className="w-full">

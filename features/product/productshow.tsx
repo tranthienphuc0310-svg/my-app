@@ -1,8 +1,8 @@
 "use client";
 import { useQueryState } from "nuqs"; // Import từ nuqs
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { productsQueryOptions } from "./queryoption";
-import SearchBarWithSuggestions from "./searchbar";
+import { productsQueryOptions } from "@/components/queryoption/productoption";
+import SearchBarWithSuggestions from "@/features/product/searchbar";
 import { useMemo } from "react";
 import Link from "next/link";
 const removeDiacritics = (str: string) => {

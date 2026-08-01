@@ -36,14 +36,14 @@ export default function Navbar() {
         {/* Right */}
         <div className="flex items-center gap-3">
           <Link
-            href={getLocalizedHref("/register")}
+            href={getLocalizedHref("/authpage/register")}
             className="rounded-lg border border-blue-600 px-5 py-2 font-medium text-blue-600 transition hover:bg-blue-50"
           >
             Register
           </Link>
 
           <Link
-            href={getLocalizedHref("/Login")}
+            href={getLocalizedHref("/authpage/Login")}
             className="rounded-lg bg-blue-600 px-5 py-2 font-medium text-white transition hover:bg-blue-700"
           >
             Login

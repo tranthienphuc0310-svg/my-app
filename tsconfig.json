@@ -32,7 +32,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "app/componentplace",
-    "app/register"
+    "app/(shop)/authpage/register"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import PostPage from "../componentplace/usequerycomponent/usequery";
+import PostPage from "@/features/product/productshow";
 import Loading from "./loading";
 export default function Page() {
   return (

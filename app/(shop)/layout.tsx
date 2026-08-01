@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Providers from "./queryclient";
+import "../globals.css";
+import Navbar from "@/components/common/navbar";
+import Providers from "../queryclient";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-import Navbar from "./componentplace/navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { SettingsSidebar } from "./componentplace/sidebar";
+import { SettingsSidebar } from "../../components/common/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { Suspense } from "react";
-import ClientProvider from "./componentplace/clientProvider";
+import ClientProvider from "../../components/provider/clientProvider";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -34,8 +34,9 @@ export default function RootLayout({
             {/* SidebarProvider bao bọc toàn bộ màn hình */}
             <SidebarProvider className="h-full w-full flex">
               {/* 1. Sidebar nằm cố định bên trái, chiếm trọn chiều cao màn hình */}
-              <SettingsSidebar />
-
+              <Suspense fallback={<div>isloading</div>}>
+                <SettingsSidebar />
+              </Suspense>
               {/* 2. Cột bên phải chứa Navbar ở trên và Nội dung ở dưới */}
               <div className="flex-1 flex flex-col min-w-0 ">
                 <Suspense fallback={<h1>isloading</h1>}>

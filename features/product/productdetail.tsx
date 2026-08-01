@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Productdetails } from "@/app/componentplace/usequerycomponent/queryoption";
+import { Productdetails } from "@/components/queryoption/productdetails";
 export default function Detailproductpage() {
   const param = useParams();
   const id = param.id as string;

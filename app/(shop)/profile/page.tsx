@@ -1,5 +1,4 @@
-import { Suspense } from "react";
-import Profile from "../componentplace/profile";
+import Profile from "@/features/profiles/profile";
 export default function Profilepage() {
   return (
     <>
