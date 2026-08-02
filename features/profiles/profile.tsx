@@ -5,7 +5,7 @@ import z from "zod";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { useQueryState } from "nuqs";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -29,6 +29,11 @@ const userSchema = z.object({
 type userInfor = z.infer<typeof userSchema>;
 export default function Profile() {
   const [user, setUser] = useState<userInfor | null>(null);
+  const [lang] = useQueryState("lang", {
+    defaultValue: "vi",
+  });
+  const getLocalizedHref = (path: string) => `${path}?lang=${lang}`;
+
   const router = useRouter();
   useEffect(() => {
     const rawdata = localStorage.getItem("user");
@@ -39,8 +44,9 @@ export default function Profile() {
   }, []);
 
   const handleLogout = () => {
+    console.log(getLocalizedHref("/authpage/Login"));
     localStorage.removeItem("user");
-    router.push("/authpage/Login");
+    router.push(getLocalizedHref("/authpage/Login"));
   };
 
   if (!user) {
@@ -49,7 +55,7 @@ export default function Profile() {
         <h1 className="text-2xl font-bold">You haven't logged in yet</h1>
 
         <Link
-          href="/authpage/Login"
+          href={getLocalizedHref("/authpage/Login")}
           className="rounded bg-blue-500 px-4 py-2 text-white"
         >
           Go to Login
@@ -60,6 +66,8 @@ export default function Profile() {
   {
     /* RIGHT */
   }
+  console.log("lang:", lang);
+  console.log("href:", getLocalizedHref("/authpage/Login"));
   return (
     <div className="min-h-screen bg-zinc-100 px-8 py-10">
       <div className="mx-auto max-w-7xl">

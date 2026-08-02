@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useQueryState } from "nuqs";
 import {
   Card,
   CardContent,
@@ -27,12 +28,16 @@ const createLoginSchema = (t: (key: string) => string) =>
     password: z.string().min(6, t("passwordMin")),
   });
 export default function Loginpage() {
+  const [lang] = useQueryState("lang", {
+    defaultValue: "vi",
+  });
+
+  const getLocalizedHref = (path: string) => `${path}?lang=${lang}`;
   const router = useRouter();
   const t = useTranslations("LoginPage");
   const loginSchema = createLoginSchema(t);
   type LoginFormData = z.infer<typeof loginSchema>;
   const loginApi = async (data: LoginFormData) => {
-    console.log("Data gửi lên:", data);
     const response = await api.post("/auth/login", data);
 
     return response.data;
@@ -56,7 +61,7 @@ export default function Loginpage() {
       toast.success(t("successTitle"), {
         description: t("successDesc"),
       });
-      router.push("/productpage");
+      router.push(getLocalizedHref("/productpage"));
     },
 
     onError: () => {
