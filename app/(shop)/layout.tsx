@@ -34,12 +34,12 @@ export default function RootLayout({
             {/* SidebarProvider bao bọc toàn bộ màn hình */}
             <SidebarProvider className="h-full w-full flex">
               {/* 1. Sidebar nằm cố định bên trái, chiếm trọn chiều cao màn hình */}
-              <Suspense fallback={<div>isloading</div>}>
+              <Suspense fallback={null}>
                 <SettingsSidebar />
               </Suspense>
-              {/* 2. Cột bên phải chứa Navbar ở trên và Nội dung ở dưới */}
+              {/* 2. Cột bên phải chứa Navbar ở tnpm rên và Nội dung ở dưới */}
               <div className="flex-1 flex flex-col min-w-0 ">
-                <Suspense fallback={<h1>isloading</h1>}>
+                <Suspense fallback={null}>
                   <Navbar />
                 </Suspense>
 

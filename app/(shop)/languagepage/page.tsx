@@ -3,7 +3,7 @@ import LanguagePage from "../../../components/common/Languagechange";
 export default function Language() {
   return (
     <>
-      <Suspense fallback={<div>isloading</div>}>
+      <Suspense fallback={null}>
         <LanguagePage />
       </Suspense>
     </>

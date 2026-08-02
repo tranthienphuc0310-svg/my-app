@@ -6,7 +6,6 @@ export default function Detailproductpage() {
   const param = useParams();
   const id = param.id as string;
   const { data } = useSuspenseQuery(Productdetails(id));
-  console.log(data);
   return (
     <div className="p-8">
       <img src={data.thumbnail} alt={data.title} className="w-80 rounded-lg" />
