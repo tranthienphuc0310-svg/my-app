@@ -9,7 +9,7 @@ const productSchema = z.object({
   rating: z.number().optional(),
   price: z.number().optional(),
   category: z.string().optional(),
-  thumbnail: z.string().optional(),
+  thumbnail: z.string()
 });
 type Productresponse = z.infer<typeof productSchema>;
 

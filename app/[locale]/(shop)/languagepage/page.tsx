@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import LanguagePage from "../../../components/common/Languagechange";
+import LanguagePage from "../../../../components/common/Languagechange";
 export default function Language() {
   return (
     <>
