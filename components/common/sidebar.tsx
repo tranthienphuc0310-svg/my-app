@@ -2,7 +2,6 @@
 
 import { Globe, User, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { useQueryState } from "nuqs";
 import {
   Sidebar,
   SidebarContent,
@@ -31,11 +30,7 @@ const items = [
 export function SettingsSidebar() {
   const pathname = usePathname();
   const router = useRouter(); // Dùng rnouter để chuyển trang khi click
-  const [lang] = useQueryState("lang", {
-    defaultValue: "vi",
-  });
 
-  const getLocalizedHref = (path: string) => `${path}?lang=${lang}`;
   return (
     <Sidebar className="border-r">
       <SidebarHeader className="border-b px-6 py-4">
@@ -53,7 +48,7 @@ export function SettingsSidebar() {
                 <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton
                     isActive={pathname === item.url}
-                    onClick={() => router.push(getLocalizedHref(item.url))} // Chuyển trang trực tiếp khi bấm
+                    onClick={() => router.push((item.url))} // Chuyển trang trực tiếp khi bấm
                     className="w-full justify-start cursor-pointer data-[active=true]:bg-accent"
                   >
                     <item.icon className="mr-2 h-4 w-4" />

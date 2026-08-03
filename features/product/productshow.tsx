@@ -13,12 +13,7 @@ const removeDiacritics = (str: string) => {
 };
 
 export default function PostPage() {
-  const [lang] = useQueryState("lang", {
-    defaultValue: "vi",
-  });
-
-  const getLocalizedHref = (path: string) => `${path}?lang=${lang}`;
-
+  
   const { data } = useSuspenseQuery(productsQueryOptions);
 
   const [search] = useQueryState("search", { defaultValue: "" });
@@ -49,7 +44,7 @@ export default function PostPage() {
 
       <ProductGrid
         products={productsArray}
-        getHref={(id) => getLocalizedHref(`/productpage/${id}`)}
+        getHref={(id) => (`/productpage/${id}`)}
       />
     </div>
   );

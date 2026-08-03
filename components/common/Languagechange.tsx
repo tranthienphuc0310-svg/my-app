@@ -1,29 +1,33 @@
 "use client";
-import { useQueryState } from "nuqs";
+
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 export default function LanguagePage() {
-  const [lang, setLang] = useQueryState("lang", {
-    defaultValue: "vi",
-    throttleMs: 100,
-    clearOnDefault: false,
-    shallow: false,
-  });
-  const LanguageOption = [
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const languageOptions = [
     { code: "en", label: "English" },
     { code: "vi", label: "Tiếng Việt" },
     { code: "de", label: "German" },
   ];
+
   return (
     <section>
       <select
-        value={lang}
-        onChange={(e) => setLang(e.target.value)}
-        className="border p-2 rounded"
+        value={locale}
+        onChange={(e) =>
+          router.replace(pathname, {
+            locale: e.target.value,
+          })
+        }
+        className="rounded border p-2"
       >
-        {/* Duyệt mảng bên trong select để sinh ra các thẻ option */}
-        {LanguageOption.map((opt) => (
-          <option key={opt.code} value={opt.code}>
-            {opt.label}
+        {languageOptions.map((option) => (
+          <option key={option.code} value={option.code}>
+            {option.label}
           </option>
         ))}
       </select>
