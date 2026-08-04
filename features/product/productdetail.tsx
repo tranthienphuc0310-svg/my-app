@@ -12,9 +12,9 @@ export default function Detailproductpage() {
       <Image
         src={data.thumbnail}
         alt={data.title}
-        className=" rounded-lg"
-        width={100}
-        height={100}
+        className=" rounded-lg justify-center items-center"
+        width={400}
+        height={400}
       />
 
       <h1 className="mt-4 text-3xl font-bold">{data.title}</h1>
