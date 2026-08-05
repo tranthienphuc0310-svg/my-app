@@ -25,6 +25,7 @@ export default function SearchBarWithSuggestions() {
   const { data: products } = useSuspenseQuery(productsQueryOptions);
 
   const suggestionMap = useMemo(() => {
+    // tao hashmap voi keytype la string va valuetype la mot mang chua chuoi
     const map = new Map<string, string[]>();
     const list = Array.isArray(products)
       ? products
