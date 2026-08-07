@@ -9,15 +9,14 @@ interface Cartitem {
 interface Carttype {
   items: Cartitem[];
   resetCart: () => void;
-  addtoCard: (product: Omit<Cartitem, "quantity">) => void;
+  addtoCart: (product: Omit<Cartitem, "quantity">) => void;
 }
 const useCart = create<Carttype>((set) => ({
   items: [],
   resetCart: () => set({ items: [] }),
-  addtoCard: (product) =>
+  addtoCart: (product) =>
     set((state) => {
       const existing = state.items.find((item) => item.id === product.id);
-
       if (existing) {
         return {
           items: state.items.map((item) =>
@@ -30,15 +29,8 @@ const useCart = create<Carttype>((set) => ({
           ),
         };
       }
-
       return {
-        items: [
-          ...state.items,
-          {
-            ...product,
-            quantity: 1,
-          },
-        ],
+        items: [...state.items, { ...product, quantity: 1 }],
       };
     }),
 }));
