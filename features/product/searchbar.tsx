@@ -53,11 +53,11 @@ export default function SearchBarWithSuggestions() {
     return map;
   }, [products]);
 
-  const cleanQuery = useMemo(() => removeDiacritics(search.trim()), [search]);
+  const searchword = useMemo(() => removeDiacritics(search.trim()), [search]);
   const suggestions = useMemo(() => {
-    if (!cleanQuery) return [];
-    return suggestionMap.get(cleanQuery) ?? [];
-  }, [cleanQuery, suggestionMap]);
+    if (!searchword) return [];
+    return suggestionMap.get(searchword) ?? [];
+  }, [searchword, suggestionMap]);
 
   useEffect(() => {
     return () => {
@@ -72,7 +72,7 @@ export default function SearchBarWithSuggestions() {
       clearTimeout(blurTimeoutRef.current);
     }
 
-    blurTimeoutRef.current = window.setTimeout(() => setIsFocused(false), 200);
+    blurTimeoutRef.current = window.setTimeout(() => setIsFocused(false), 400);
   };
 
   const handleSuggestionSelect = (title: string) => {
