@@ -10,8 +10,9 @@ interface Carttype {
   items: Cartitem[];
   resetCart: () => void;
   addtoCart: (product: Omit<Cartitem, "quantity">) => void;
+  removefromcart: (id: number) => void;
 }
-const useCart = create<Carttype>((set) => ({
+export const useCart = create<Carttype>((set) => ({
   items: [],
   resetCart: () => set({ items: [] }),
   addtoCart: (product) =>
@@ -33,4 +34,9 @@ const useCart = create<Carttype>((set) => ({
         items: [...state.items, { ...product, quantity: 1 }],
       };
     }),
+
+  removefromcart: (id) =>
+    set((state) => ({
+      items: state.items.filter((item) => item.id !== id),
+    })),
 }));
