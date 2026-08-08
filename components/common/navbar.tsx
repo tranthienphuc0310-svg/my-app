@@ -41,6 +41,7 @@ export default function Navbar() {
           >
             Login
           </Link>
+          <Link href={"/cart"}>cart</Link>
         </div>
       </nav>
     </header>

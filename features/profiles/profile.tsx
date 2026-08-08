@@ -28,7 +28,7 @@ const userSchema = z.object({
 type userInfor = z.infer<typeof userSchema>;
 export default function Profile() {
   const [user, setUser] = useState<userInfor | null>(null);
- 
+
   const router = useRouter();
   useEffect(() => {
     const rawdata = localStorage.getItem("user");
@@ -40,7 +40,7 @@ export default function Profile() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    router.push(("/authpage/Login"));
+    router.push("/authpage/Login");
   };
 
   if (!user) {
@@ -49,7 +49,7 @@ export default function Profile() {
         <h1 className="text-2xl font-bold">You haven't logged in yet</h1>
 
         <Link
-          href={("/authpage/Login")}
+          href={"/authpage/Login"}
           className="rounded bg-blue-500 px-4 py-2 text-white"
         >
           Go to Login

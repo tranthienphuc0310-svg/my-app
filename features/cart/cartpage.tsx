@@ -13,7 +13,10 @@ export default function Cartpage() {
             <li key={item.id}>
               <div>
                 <X />
-                <button onClick={() => removeitemfromcart(item.id)}>
+                <button
+                  className="cursor-pointer"
+                  onClick={() => removeitemfromcart(item.id)}
+                >
                   delete
                 </button>
                 <span>{item.id}</span>
@@ -22,9 +25,7 @@ export default function Cartpage() {
                   alt="product image"
                   width={200}
                   height={200}
-                >
-                  {item.thumbnail}
-                </Image>
+                />
               </div>
             </li>
           ))}

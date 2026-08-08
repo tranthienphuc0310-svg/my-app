@@ -7,6 +7,9 @@ import { useCart } from "@/store/cart-store";
 export default function Detailproductpage() {
   const param = useParams();
   const addtocart = useCart((state) => state.addtoCart);
+  console.log("PARAM:", param);
+  console.log("ID:", param.id);
+
   const id = param.id as string;
   const { data } = useSuspenseQuery(Productdetails(id));
   return (
