@@ -39,7 +39,6 @@ export default function Profile() {
   }, []);
 
   const handleLogout = () => {
-    console.log(("/authpage/Login"));
     localStorage.removeItem("user");
     router.push(("/authpage/Login"));
   };

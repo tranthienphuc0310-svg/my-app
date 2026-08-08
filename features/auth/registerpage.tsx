@@ -81,7 +81,6 @@ export default function Registerpage() {
       return createUserApi(payload);
     },
     onSuccess: (data) => {
-      console.log("Server phản hồi:", data);
       toast.success(t("successTitle"), {
         description: t("successDesc"),
       });

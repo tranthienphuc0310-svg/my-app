@@ -3,8 +3,10 @@ import { useParams } from "next/navigation";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Productdetails } from "@/components/queryoption/productdetails";
 import Image from "next/image";
+import { useCart } from "@/store/cart-store";
 export default function Detailproductpage() {
   const param = useParams();
+  const addtocart = useCart((state) => state.addtoCart);
   const id = param.id as string;
   const { data } = useSuspenseQuery(Productdetails(id));
   return (
@@ -26,6 +28,19 @@ export default function Detailproductpage() {
       <p>Category: {data.category}</p>
 
       <p>Rating: ⭐ {data.rating}</p>
+      <button
+        className="cursor-pointer"
+        onClick={() =>
+          addtocart({
+            id: data.id,
+            title: data.title,
+            thumbnail: data.thumbnail,
+            price: data.price,
+          })
+        }
+      >
+        add to cart
+      </button>
     </div>
   );
 }
