@@ -10,6 +10,7 @@ const productSchema = z.object({
   price: z.number(),
   category: z.string().optional(),
   thumbnail: z.string(),
+  quantity: z.number().min(1),
 });
 type Productresponse = z.infer<typeof productSchema>;
 

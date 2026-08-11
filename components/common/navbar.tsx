@@ -2,7 +2,7 @@
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import Link from "next/link";
-
+import { ShoppingCart } from "lucide-react";
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
@@ -41,7 +41,14 @@ export default function Navbar() {
           >
             Login
           </Link>
-          <Link href={"/cart"}>cart</Link>
+
+          <Link
+            href="/cart"
+            className="flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 font-medium text-white transition hover:bg-green-600"
+          >
+            <ShoppingCart size={20} />
+            Cart
+          </Link>
         </div>
       </nav>
     </header>
