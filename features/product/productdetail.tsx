@@ -39,7 +39,6 @@ export default function Detailproductpage() {
             title: data.title,
             thumbnail: data.thumbnail,
             price: data.price,
-            quantity: data.quantity,
           })
         }
       >
