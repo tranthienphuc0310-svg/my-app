@@ -6,11 +6,13 @@ type Product = {
   title: string;
   price: number;
   thumbnail: string;
+};
+type Cartitem = Product & {
   quantity: number;
 };
 
 type CartState = {
-  items: Product[];
+  items: Cartitem[];
   addtoCart: (product: Product) => void;
   removefromcart: (id: number) => void;
 };
@@ -38,7 +40,7 @@ export const useCart = create<CartState>()(
           }
 
           return {
-            items: [...state.items, product],
+            items: [...state.items, { ...product, quantity: 1 }],
           };
         }),
 
