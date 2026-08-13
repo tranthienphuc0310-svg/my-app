@@ -21,7 +21,7 @@ export default function Detailproductpage() {
         <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
           <div className="grid md:grid-cols-2">
             {/* Product Image */}
-            <div className="flex min-h  -125 items-center justify-center bg-gray-50 p-8">
+            <div className="flex min-h-125 items-center justify-center bg-gray-50 p-8">
               <div className="relative h-100 w-100">
                 <Image
                   src={data.thumbnail}
