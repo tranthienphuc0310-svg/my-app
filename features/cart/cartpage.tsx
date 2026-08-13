@@ -83,7 +83,7 @@ export default function Cartpage() {
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-500">
-                      Product ID: {item.id}
+                      Product ID:{item.id}
                     </p>
                   </div>
 
