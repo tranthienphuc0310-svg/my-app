@@ -14,8 +14,13 @@ const productSchema = z.object({
 type Productresponse = z.infer<typeof productSchema>;
 
 const fetchdetailproduct = async (id: string): Promise<Productresponse> => {
-  const res = await axios.get(`https://dummyjson.com/products/${id}`);
-  return productSchema.parse(res.data);
+  try {
+    const res = await axios.get(`https://dummyjson.com/products/${id}`);
+    return productSchema.parse(res.data);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 export const Productdetails = (id: string) =>
   queryOptions({

@@ -17,10 +17,15 @@ const productsSchema = z.object({
 });
 type ProductsResponse = z.infer<typeof productsSchema>;
 const fetchPosts = async (): Promise<ProductsResponse> => {
+  try{
   await new Promise((resolve) => setTimeout(resolve, 1000));
   const response = await axios.get("https://dummyjson.com/products?limit=194");
   const validatedData = productsSchema.parse(response.data);
   return validatedData;
+} catch(error){
+  console.error(error)
+  throw error
+}
 };
 export const productsQueryOptions = queryOptions({
   queryKey: ["products"],
