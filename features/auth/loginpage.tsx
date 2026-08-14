@@ -32,7 +32,6 @@ export default function Loginpage() {
   const loginSchema = createLoginSchema(t);
   type LoginFormData = z.infer<typeof loginSchema>;
   const loginApi = async (data: LoginFormData) => {
-<<<<<<< HEAD
     try {
       const response = await api.post("/auth/login", data);
 
@@ -40,14 +39,6 @@ export default function Loginpage() {
     } catch (error) {
       console.error(error);
     }
-=======
-    try{
-    const response = await api.post("/auth/login", data);
-
-    return response.data;
-    } catch(error){
-      console.error(error)
->>>>>>> 9a177f2d875cb7b1fe686b0b5cae0be48d655f6f
   };
   const {
     register,
