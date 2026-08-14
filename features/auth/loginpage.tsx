@@ -27,15 +27,18 @@ const createLoginSchema = (t: (key: string) => string) =>
     password: z.string().min(6, t("passwordMin")),
   });
 export default function Loginpage() {
-
   const router = useRouter();
   const t = useTranslations("LoginPage");
   const loginSchema = createLoginSchema(t);
   type LoginFormData = z.infer<typeof loginSchema>;
   const loginApi = async (data: LoginFormData) => {
-    const response = await api.post("/auth/login", data);
+    try {
+      const response = await api.post("/auth/login", data);
 
-    return response.data;
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
   };
   const {
     register,
@@ -56,7 +59,7 @@ export default function Loginpage() {
       toast.success(t("successTitle"), {
         description: t("successDesc"),
       });
-      router.push(("/productpage"));
+      router.push("/productpage");
     },
 
     onError: () => {
