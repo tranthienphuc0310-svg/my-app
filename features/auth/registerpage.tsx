@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -48,8 +48,12 @@ const createLoginSchema = (t: (key: string) => string) =>
 const createUserApi = async (
   data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
 ) => {
-  const response = await api.post("users", data);
-  return response.data;
+  try {
+    const response = await api.post("users", data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default function Registerpage() {
