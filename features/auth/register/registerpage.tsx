@@ -2,8 +2,9 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import axios from "axios";
+import { Loginformdata } from "./schema";
+import { registerMutationOptions } from "./mutation";
+import { createLoginSchema } from "./schema";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -19,57 +20,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-const api = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
-});
-
-// Tạo schema bằng hàm để nhận diện bản dịch từ next-intl
-const createLoginSchema = (t: (key: string) => string) =>
-  z
-    .object({
-      username: z.string().min(3, t("usernameMin")),
-      email: z.email(t("emailInvalid")),
-      password: z.string().min(6, t("passwordMin")),
-      confirmPassword: z.string(),
-    })
-    .refine(
-      async (data) => {
-        // Tạo một khoảng trễ (timeout) 1 giây trước khi kiểm tra
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // Trả về kết quả so sánh (true nếu khớp, false nếu không khớp)
-        return data.password === data.confirmPassword;
-      },
-      {
-        message: t("passwordMismatch"),
-        path: ["confirmPassword"],
-      },
-    );
-const createUserApi = async (
-  data: Omit<z.infer<ReturnType<typeof createLoginSchema>>, "confirmPassword">,
-) => {
-  try {
-    const response = await api.post("users", data);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export default function Registerpage() {
   const t = useTranslations("Registerpage");
   const Router = useRouter();
 
-  // Khởi tạo schema dựa trên ngôn ngữ hiện tại
   const loginSchema = createLoginSchema(t);
-  type LoginFormData = z.infer<typeof loginSchema>;
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<LoginFormData>({
+  } = useForm<Loginformdata>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       username: "",
@@ -80,16 +42,13 @@ export default function Registerpage() {
   });
 
   const mutation = useMutation({
-    mutationFn: async (data: LoginFormData) => {
-      const { confirmPassword, ...payload } = data;
-      return createUserApi(payload);
-    },
-    onSuccess: (data) => {
+    ...registerMutationOptions(),
+    onSuccess: () => {
       toast.success(t("successTitle"), {
         description: t("successDesc"),
       });
       reset();
-      Router.push("/productpage");
+      Router.push("/authpage/Login");
     },
     onError: () => {
       toast.error(t("errorTitle"), {
@@ -98,7 +57,7 @@ export default function Registerpage() {
     },
   });
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = (data: Loginformdata) => {
     mutation.mutate(data);
   };
 
