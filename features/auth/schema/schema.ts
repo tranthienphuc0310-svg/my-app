@@ -1,6 +1,6 @@
 import z from "zod";
-
-export const createLoginSchema = (t: (key: string) => string) =>
+// reguster schema
+export const createRegisterSchema = (t: (key: string) => string) =>
   z
     .object({
       username: z.string().min(3, t("usernameMin")),
@@ -13,7 +13,6 @@ export const createLoginSchema = (t: (key: string) => string) =>
         // Tạo một khoảng trễ (timeout) 1 giây trước khi kiểm tra
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        // Trả về kết quả so sánh (true nếu khớp, false nếu không khớp)
         return data.password === data.confirmPassword;
       },
       {
@@ -21,4 +20,12 @@ export const createLoginSchema = (t: (key: string) => string) =>
         path: ["confirmPassword"],
       },
     );
-export type Loginformdata= z.infer<ReturnType<typeof createLoginSchema>>
+export type Registerformdata = z.infer<ReturnType<typeof createRegisterSchema>>;
+
+// login Schema
+export const createLoginSchema = (t: (key: string) => string) =>
+  z.object({
+    username: z.string().min(3, t("usernameMin")),
+    password: z.string().min(6, t("passwordMin")),
+  });
+export type LoginFormData = z.infer<ReturnType<typeof createLoginSchema>>;
