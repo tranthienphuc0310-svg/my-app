@@ -2,7 +2,7 @@
 import { useQueryState } from "nuqs"; // Import từ nuqs
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { productsQueryOptions } from "@/components/queryoption/productoption";
-import SearchBarWithSuggestions from "@/features/product/searchbar";
+import SearchBarWithSuggestions from "@/features/product/searchbar/searchbar";
 import { useMemo } from "react";
 import ProductGrid from "./productgrid";
 const removeDiacritics = (str: string) => {
@@ -13,7 +13,6 @@ const removeDiacritics = (str: string) => {
 };
 
 export default function PostPage() {
-  
   const { data } = useSuspenseQuery(productsQueryOptions);
 
   const [search] = useQueryState("search", { defaultValue: "" });
@@ -26,14 +25,9 @@ export default function PostPage() {
     // 1. Lọc sản phẩm
     const filtered = data.products.filter((product: any) => {
       const title = removeDiacritics(product.title || "");
-      const description = removeDiacritics(product.description || "");
       const category = removeDiacritics(product.category || "");
 
-      return (
-        title.includes(searchTerm) ||
-        description.includes(searchTerm) ||
-        category.includes(searchTerm)
-      );
+      return title.includes(searchTerm) || category.includes(searchTerm);
     });
     return filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   }, [data?.products, search]);
@@ -44,7 +38,7 @@ export default function PostPage() {
 
       <ProductGrid
         products={productsArray}
-        getHref={(id) => (`/productpage/${id}`)}
+        getHref={(id) => `/productpage/${id}`}
       />
     </div>
   );
