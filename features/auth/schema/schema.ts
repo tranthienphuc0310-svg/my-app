@@ -22,7 +22,7 @@ export const createRegisterSchema = (t: (key: string) => string) =>
     );
 export type Registerformdata = z.infer<ReturnType<typeof createRegisterSchema>>;
 
-// login Schema
+// login SchemaA
 export const createLoginSchema = (t: (key: string) => string) =>
   z.object({
     username: z.string().min(3, t("usernameMin")),

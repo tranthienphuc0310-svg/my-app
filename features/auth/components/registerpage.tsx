@@ -25,14 +25,14 @@ export default function Registerpage() {
   const t = useTranslations("Registerpage");
   const Router = useRouter();
 
-  const loginSchema = createRegisterSchema(t);
+  const RegisterSchema = createRegisterSchema(t);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<Registerformdata>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       username: "",
       email: "",
